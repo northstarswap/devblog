@@ -7,7 +7,7 @@ tags:
 # Declaring component pointer members and instantiating components
 Epic's documentation makes a handful of mistakes when demonstrating how to correctly declare component pointer members and instantiate them in a constructor (often called a "ctor")
 
-The following is an example of the correct way to add component pointer members to an actor in 5.0+ (for example's sake—a capsule component and a static mesh component):
+The following is an example of the correct way to add component pointer members to an actor in 5.0+ (for example's sake: a capsule component and a static mesh component):
 
 ```cpp
 // NsActor.h
