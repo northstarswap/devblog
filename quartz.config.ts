@@ -8,8 +8,8 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Northstar Dev Notes",
-    pageTitleSuffix: "",
+    pageTitle: "nstar.dev",
+    pageTitleSuffix: " - nstar.dev",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
@@ -21,9 +21,9 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        title: "Zalando Sans Expanded",
-        header: "Zalando Sans SemiExpanded",
-        body: "Zalando Sans",
+        title: "Orbitron",
+        header: "Inter Tight",
+        body: "Inter",
         code: "Cousine",
       },
       colors: {
@@ -33,10 +33,10 @@ const config: QuartzConfig = {
           gray: "#b8b8b8",
           darkgray: "#4e4e4e",
           dark: "#2b2b2b",
-          secondary: "#2b2b2b",
-          tertiary:"#4e4e4e", 
-          highlight: "#2b2b2b",
-          textHighlight: "#4e4e4e",
+          secondary: "#081EB1FF",
+          tertiary:"#49628BFF", 
+          highlight: "#8BB3D998",
+          textHighlight:"#0779E398",
         },
         darkMode: {
           light: "#121213FF",
@@ -44,10 +44,10 @@ const config: QuartzConfig = {
           gray: "#5D5D61FF",
           darkgray: "#d4d4d4",
           dark: "#d4d4d4",
-          secondary: "#d4d4d4",
-          tertiary:"#d4d4d4", 
-          highlight: "#d4d4d4",
-          textHighlight:"#d4d4d4",
+          secondary: "#AFE7FDFF",
+          tertiary:"#DBE9F5FF", 
+          highlight: "#174A74C2",
+          textHighlight:"#0779E398",
         },
       },
     },
@@ -80,15 +80,15 @@ const config: QuartzConfig = {
       Plugin.FolderPage(),
       Plugin.TagPage(),
       Plugin.ContentIndex({
-        enableSiteMap: true,
-        enableRSS: true,
+        enableSiteMap: false,
+        enableRSS: false,
       }),
       Plugin.Assets(),
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      // Plugin.CustomOgImages(),
     ],
   },
 }

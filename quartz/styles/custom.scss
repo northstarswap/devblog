@@ -1,20 +1,27 @@
 @use "./base.scss";
 
 body {
-  position: relative;
   min-height: 100vh;
-  overflow: hidden;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 40% 30%, #040a3d, #000000);
+  background: radial-gradient(circle at 50% 0%, #02122c, #000000, #000000);
   filter: blur(80px);
   z-index: -1;
 }
 
-.in-view {
-    margin-bottom: 50px;
+// Light mode override
+[saved-theme="light"] body::before {
+  background: #c1c1c1;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+li:last-child {
+    margin-bottom: 0;
 }
