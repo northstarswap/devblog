@@ -15,6 +15,8 @@ The following is an example of the correct way to add component pointer members 
 UCLASS()
 class ANsActor : public AActor
 {
+	GENERATED_BODY()
+
 public:
 	ANsActor();
 	
