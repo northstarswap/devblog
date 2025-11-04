@@ -10,7 +10,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 40% 30%, #03082f, #0b0b0c);
+  background: radial-gradient(circle at 40% 30%, #040a3d, #000000);
   filter: blur(80px);
   z-index: -1;
 }
