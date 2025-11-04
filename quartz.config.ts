@@ -8,24 +8,22 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "Northstar Dev Notes",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: {
-      provider: "plausible",
-    },
+    analytics: null,
     locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "blog.nstar.dev",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
-        code: "IBM Plex Mono",
+        header: "Zalando Sans SemiExpanded",
+        body: "Zalando Sans",
+        code: "Cousine",
       },
       colors: {
         lightMode: {
@@ -61,10 +59,10 @@ const config: QuartzConfig = {
       }),
       Plugin.SyntaxHighlighting({
         theme: {
-          light: "github-light",
-          dark: "github-dark",
+          light: "light-plus",
+          dark: "dark-plus",
         },
-        keepBackground: false,
+        keepBackground: true,
       }),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
