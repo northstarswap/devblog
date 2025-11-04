@@ -2,14 +2,15 @@
 
 body {
   min-height: 100vh;
+  background-color: #000000;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, #02122c, #000000, #000000);
-  filter: blur(80px);
+  background: radial-gradient(circle at 50% 0%, #021738, #000000, #000000);
+  filter: blur(0px);
   z-index: -1;
 }
 
@@ -50,7 +51,13 @@ p {
     font-size: 1.0rem;
 }
 
+a.internal {
+    padding: .15rem .4rem;
+}
+
 a.internal.tag-link {
     font-size: 0.9rem;
-    padding: .4rem, .6rem;
+    padding: .3rem .5rem;
+    border-radius: 4px;
+    text-transform: lowercase;
 }
