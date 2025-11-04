@@ -5,6 +5,14 @@ tags:
   - Advanced
 title: How to permanently remove Hot Reload and Reinstancing from an Unreal source build
 ---
+This is the most comprehensive method for preventing users from accessing Hot Reload and Reinstancing. It involves modifying UHT-injected macro definitions to prevent Hot Reload from being compiled in at all and as non-invasively-as-possible disabling Reinstancing while leaving Live Coding intact. 
+
+This will completely prevent Live Coding from permanently corrupting assets on all of your team members' machines, but also prevent them from compiling reflected changes with the editor open (as it should be). Please remember to inform any members of your team of these modifications, as they break the convention of what most developers expect when working on an Unreal project.
+
+If you're here, you likely already know why you would want to perform this modification. If not, [this article](Live%20Coding) is probably what you're looking for.
+
+This modification is even more important if you have team members that use Linux or MacOS, as these platforms do not support Live Coding (it's Windows-only) and thus force Hot Reload on.
+
 > [!DANGER]
 > The methods involved in this article involve modifying engine source to achieve complete removal of Hot Reload and permanent disablement of Reinstancing. It assumes significant experience with Unreal, C++, and modifying the engine. I am not responsible for breakages or your teammates complaining that they have to properly build from their IDE instead of letting Reinstancing spin the wheel of corruption.
 
@@ -24,14 +32,6 @@ title: How to permanently remove Hot Reload and Reinstancing from an Unreal sour
 > * Adding new non-reflected classes and structs
 >   
 >  Users will be able to turn Live Coding on/off through their Editor Preferences without the risk of enabling Hot Reload through a checkbox, but the Reinstancing option will be eliminated entirely.
-
-This is the most comprehensive method for preventing users from accessing Hot Reload and Reinstancing. It involves modifying UHT-injected macro definitions to prevent Hot Reload from being compiled in at all and as non-invasively-as-possible disabling Reinstancing while leaving Live Coding intact. 
-
-This will completely prevent Live Coding from permanently corrupting assets on all of your team members' machines, but also prevent them from compiling reflected changes with the editor open (as it should be). Please remember to inform any members of your team of these modifications, as they break the convention of what most developers expect when working on an Unreal project.
-
-If you're here, you likely already know why you would want to perform this modification. If not, [this article](Live%20Coding) is probably what you're looking for.
-
-This modification is even more important if you have team members that use Linux or MacOS, as these platforms do not support Live Coding (it's Windows-only) and thus force Hot Reload on.
 # Step 1: Removing the `WITH_HOT_RELOAD` preprocessor define to compile without Hot Reload
 
 In `Engine/Source/Runtime/Core/Public/Misc/Build.h`, find the following section:
