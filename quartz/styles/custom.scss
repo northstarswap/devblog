@@ -1,9 +1,18 @@
 @use "./base.scss";
 
 body {
-  margin: 0;
-  background: radial-gradient(circle at center, #040621, #000);
-  filter: blur(60px);
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 40% 30%, #ff7f50, #1e90ff, #000);
+  filter: blur(80px);
+  z-index: -1;
 }
 
 .in-view {
