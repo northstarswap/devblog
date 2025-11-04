@@ -12,7 +12,7 @@ In the Unreal education community, it's common practice to introduce newcomers t
 If you're coming from another game e:w
 ngine such as **Unity** or **Godot**, the workflow of keeping the editor open while compiling runtime script changes is likely familiar. However, in Unreal Engine this workflow is only possible through hacky workarounds known as **Live Coding**, **Reinstancing**, and **Hot Reload**. 
 
-This article will provide a comprehensive summary of the safe workflow when working with C++ in an Unreal project as well as context and explanations as to why Live Coding is not the same as Unity or Godot hot reloading assemblies for managed languages C#/GDScript.
+This article will provide a comprehensive summary of the safe workflow when working with C++ in an Unreal project as well as context and explanations as to why Live Coding is not the same as Unity or Godot hot reloading assemblies for managed languages like C#/GDScript.
 
 # Unreal's editor is different than other engines' editors
 In other popular game engines available to the general public, the editor is an unchanging binary that hosts your assets. When you want to work on your project, you launch the editor and keep it open for the duration of your work session while you add, remove, and modify scripts in a managed language that runs in a virtual machine like C# where hot reloading is well-supported.

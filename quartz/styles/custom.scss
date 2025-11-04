@@ -1,3 +1,9 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+body {
+  background-image: url("static/bg.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
