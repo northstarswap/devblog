@@ -1,11 +1,11 @@
 @use "./base.scss";
 
-body [data-theme="dark"] {
+body {
   margin: 0;
   background: radial-gradient(circle at center, #040621, #000);
   filter: blur(60px);
 }
 
 .in-view {
-    margin-bottom: 6px;
+    margin-bottom: 50px;
 }
