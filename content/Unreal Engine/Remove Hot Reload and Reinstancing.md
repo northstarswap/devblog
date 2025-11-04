@@ -72,7 +72,7 @@ Remove `WithHotReload` from the flag:
 ```
 
 Hot reload will now be completely omitted from your engine builds.
-# Permanently disable Reinstancing
+# Step 2: Permanently disable Reinstancing
 
 In `Engine/Source/Developer/Windows/LiveCoding/LiveCodingSettings.h`, find the following `UPROPERTY`s
 ```c++
@@ -126,7 +126,7 @@ bool FLiveCodingModule::AutomaticallyCompileNewClasses() const
 }
 ```
 
-## Adding a Warning for Developers that use the New Class Wizard
+# Step 3: Adding a Warning for Developers that use the New Class Wizard
 
 Some developers prefer to use the New Class wizard to create class files as it includes file templates for common Unreal classes where vanilla Visual Studio provides none (Rider does provide templates in *Add* > *Unreal Engine Class...* and the [Unreal Wizard plugin](https://marketplace.visualstudio.com/items?itemName=Fiquegnima-productions.UnrealWiz) provides them for VS). 
 
