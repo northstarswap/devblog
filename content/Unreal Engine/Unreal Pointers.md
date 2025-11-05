@@ -3,7 +3,6 @@ title: Unreal Pointer Type Reference
 tags:
   - Unreal
   - Programming
-draft: false
 ---
 # Terminology
 * **Strong Reference**: Reference that keeps what it's pointing to alive.

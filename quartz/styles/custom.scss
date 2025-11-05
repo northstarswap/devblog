@@ -58,10 +58,14 @@ a.internal {
     padding: .0rem;
 }
 
-
 a.internal.tag-link {
     font-size: 0.9rem;
     padding: .3rem .5rem;
     border-radius: 4px;
     text-transform: lowercase;
+}
+
+code {
+    background-color: var(--highlight);
+    color: var(--secondary);
 }
