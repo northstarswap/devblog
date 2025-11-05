@@ -1,10 +1,15 @@
 @use "./base.scss";
 
-// define extra var colors
+@font-face {
+    font-family: "Ferrite Core DX Regular";
+    src: url("/static/fonts/FerriteCoreDX-Regular.ttf") format("truetype");
+}
+
 :root {
-  --brandColor: #a7e6fa;
+  --brandColor: #beebf8;
   --background: #000000;
   --rimLight: #4b4b4c;
+  --brandFont: 'Ferrite Core DX Regular', sans-serif;
 }
 
 body {
@@ -63,6 +68,10 @@ li a {
 
 li:last-child {
     margin-bottom: 0;
+}
+
+li:first-child {
+    margin-top: 0;
 }
 
 time {
@@ -130,13 +139,26 @@ code {
     color: var(--secondary);
 }
 
-// Recent Article links
+// Recent Articles
+.recent-notes > ul.recent-ul > li:first-child {
+    margin-top: 0.4rem;
+}
+
+.recent-notes > h3 {
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--highlight);
+}
+
 .section .desc h3 a {
     padding-left: 0;
     font-weight: bold;
     font-family: var(--bodyFont);
     line-height: 1.0rem;
     color: var(--darkgray);
+}
+
+.recent-notes > ul.recent-ul {
+    margin-top: 0;
 }
 
 // Breadcrumbs
@@ -153,4 +175,5 @@ code {
 // Title customization
 .page-title a {
     color: var(--brandColor);
+    font-family: var(--brandFont);
 }

@@ -10,7 +10,7 @@ tags:
 * **Hard Reference**: Reference to an object stored on disk that is a dependency for the type in which this member resides. Side effects explained below.
 * **Soft Reference**: Reference to an object stored on disk that may or may not be currently loaded.
 
-# Unreal UObject GC Pointers
+# UObject GC Pointers
 The `UObject` pointers are used to manage the lifetime of a `UObject`.
 
 `UObject`s are garbage collector (GC) managed objects that will be destroyed when the GC runs if there isn't an unbroken path from the "root" to the object through a chain of **strong references** through other `UObject`s and `USTRUCT`s. 
@@ -155,6 +155,16 @@ TSharedRef<FFoo> NewFooWithArgs = MakeShared<FFoo>(new FFoo(5, "Bar"));
 `MakeUnique` takes variadic arguments in the same was as `MakeShared` while `MakeUniqueForOverwrite` takes no arguments. Additionally, `MakeUnique` zeroes the memory of the newly-allocated referenced object while `MakeUniqueForOverwrite` leaves it uninitialized. 
 
 It's generally recommended to use `MakeUnique` unless you have a specific need for `MakeUniqueForOverwrite`.
+
+## TSharedFromThis
+When creating a class or struct that's intended to be allocated inside a Smart Pointer, it's often a good idea to inherit `TSharedFromThis<T>`:
+
+```cpp
+struct FFoo: TSharedFromThis<FFoo>
+{}
+```
+
+This enables the use of `SharedThis(this)` from inside the type, allowing it to pass a reference to itself as a shared pointer. This is particularly useful when creating delegate bindings with `CreateSP`.
 
 # Soft Asset Pointers
 Unreal's asset pointers are an abstraction for assets located on disk that makes them behave like a normal `UObject` pointer, however they may or may not be loaded at any given time. Internally, they are just string paths to the asset in the application's virtual filesystem. 
