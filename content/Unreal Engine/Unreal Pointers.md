@@ -11,11 +11,9 @@ tags:
 * **Soft Reference**: Reference to an object stored on disk that may or may not be currently loaded.
 
 # Unreal UObject GC Pointers
-The `UObject` pointers are, unsurprisingly, used to manage the lifetime of a `UObject`.
+The `UObject` pointers are used to manage the lifetime of a `UObject`.
 
 `UObject`s are garbage collector (GC) managed objects that will be destroyed when the GC runs if there isn't an unbroken path from the "root" to the object through a chain of **strong references** through other `UObject`s and `USTRUCT`s. 
-
-In effect, **if there are no strong references that can be reached from the root, the `UObject` will eventually be destroyed.*
 
 `UObject`s are always allocated on the heap and cannot be created on the stack nor created without the use of `NewObject`. 
 

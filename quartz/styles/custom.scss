@@ -1,17 +1,50 @@
 @use "./base.scss";
 
+// define extra var colors
+:root {
+  --brandColor: #a7e6fa;
+  --background: #000000;
+  --rimLight: #4b4b4c;
+}
+
 body {
   min-height: 100vh;
   background-color: #000000;
+}
+
+.page > #quartz-body {
+    padding: 0;
+}
+
+.center {
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, #021738, #000000, #000000);
+  background: radial-gradient(circle at 35% -10%, var(--highlight), #000000, #000000, #000000);
   filter: blur(0px);
   z-index: -1;
+}
+
+// Mobile overrides
+@media (max-width: 800px) {
+    .page > #quartz-body .sidebar.left:has(.explorer) {
+        background: var(--background);
+    }
+    
+    .explorer .explorer-content {
+        background: var(--background);
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .search {
+        margin-right: 1rem;
+    }
 }
 
 // Light mode override
@@ -20,15 +53,24 @@ body::before {
 }
 
 li {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 li a {
     font-weight: normal;
+    font-size: 0.9rem;
 }
 
 li:last-child {
     margin-bottom: 0;
+}
+
+time {
+    font-size: 0.8rem;
+}
+
+.content-meta span {
+    font-size: 0.8rem;
 }
 
 h1 {
@@ -54,18 +96,61 @@ p {
 a.alias {
     padding: .15rem .4rem;
 }
+
 a.internal {
-    padding: .0rem;
+    padding: 0;
+    background: none;
+    font-weight: normal;
+    color: var(--brandColor);
 }
 
 a.internal.tag-link {
-    font-size: 0.9rem;
-    padding: .3rem .5rem;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    padding: .2rem .4rem;
     border-radius: 4px;
     text-transform: lowercase;
+	background: linear-gradient(135deg, var(--highlight), rgba(255, 255, 255, 0.05));
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	border: 1px solid var(--highlight);
+	box-shadow:
+		0 8px 24px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 var(--rimLight);
+	overflow: hidden;
+}
+
+a.external {
+    font-weight: normal;
+    color: var(--brandColor);
 }
 
 code {
     background-color: var(--highlight);
     color: var(--secondary);
+}
+
+// Recent Article links
+.section .desc h3 a {
+    padding-left: 0;
+    font-weight: bold;
+    font-family: var(--bodyFont);
+    line-height: 1.0rem;
+    color: var(--darkgray);
+}
+
+// Breadcrumbs
+.breadcrumb-element a {
+    color: var(--darkgray);
+}
+
+// Fix search titles
+.preview-inner h1.article-title {
+    line-height: 2rem;
+    font-size: 2rem;
+}
+
+// Title customization
+.page-title a {
+    color: var(--brandColor);
 }

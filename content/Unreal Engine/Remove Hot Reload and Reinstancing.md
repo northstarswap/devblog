@@ -144,7 +144,7 @@ void GameProjectUtils::OpenAddToProjectDialog(const FAddToProjectConfig& Config,
 }
 ```
 
-# The Result
+# Result
 After compiling, to confirm that Hot Reload is completely gone you can go into Editor Settings and untick `Enable Live Coding`. When you click the hotpatch button in the bottom right of the Editor we should see the following warning in the log:
 ```
 Warning: RebindPackages not possible (hot reload not supported)
