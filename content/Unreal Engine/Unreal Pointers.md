@@ -28,7 +28,7 @@ Per Epic's documentation, `TObjectPtr` should only ever be used as a `UPROPERTY`
 
 It purpose is to assert ownership over a `UObject` by a `UCLASS` or `USTRUCT` and tie its lifecycle to its owner's for clean memory management. 
 
-If you need to hold on to a reference to an object in two places, it's more likely you want a [TWeakObjectPtr](#TWeakObjectPtr) in the non-owning location.
+If you need to hold on to a reference to an object in two places, it's more likely you want a [TWeakObjectPtr](#tweakobjectptr) in the non-owning location.
 
 It's recommended to migrate legacy code using raw `T*` pointers to `TObjectPtr<T>` for compatiblility with future engine versions. On 5.4+ UHT will emit warnings for `UPROPERTY`'d raw `T*` pointers.
 
