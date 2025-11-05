@@ -33,10 +33,10 @@ export const defaultContentPageLayout: PageLayout = {
         // { Component: Component.ReaderMode() },
       ],
     }),
-    Component.RecentNotes({
+    Component.DesktopOnly(Component.RecentNotes({
       title: "Recent Articles",
       limit: 3
-    }),
+    })),
     Component.Explorer(),
   ],
   right: [

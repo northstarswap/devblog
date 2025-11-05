@@ -1,5 +1,5 @@
 ---
-title: Unreal UObject and Smart Pointer Guide
+title: Unreal Pointer Type Reference
 tags:
   - Unreal
   - Programming
@@ -15,6 +15,8 @@ draft: true
 The `UObject` pointers are, unsurprisingly, used to manage the lifetime of a `UObject`.
 
 `UObject`s are garbage collector (GC) managed objects that will be destroyed when the GC runs if there isn't an unbroken path from the "root" to the object through a chain of **strong references** through other `UObject`s and `USTRUCT`s. 
+
+In effect, **if there are no strong references that can be reached from the root, the `UObject` will eventually be destroyed.*
 
 `UObject`s are always allocated on the heap and cannot be created on the stack nor created without the use of `NewObject`. 
 
@@ -36,6 +38,11 @@ It's recommended to migrate legacy code using raw `T*` pointers to `TObjectPtr<T
 ## TWeakObjectPtr
 `TWeakObjectPtr<T>` is a **weak reference** to a `UObject`. It does not keep the object alive and may become invalid at any time.
 
+`UObject`s referenced by `TWeakObjectPtr` may be remotely GC'd at any time. Before dereferencing or using `TWeakObjectPtr`, always check for `IsValid()` on the `TWeakObjectPtr`.
+
+> [!info]
+> If you call `Get()` on a `TWeakObjectPtr` there's no need to call `IsValid()` before. `Get()` internally performs an `IsValid()` check and returns `nullptr` if it isn't valid.
+
 It's mainly useful when you want a `UObject` to be owned by one object, but observed by another. For example, a UI widget may want to observe a `UObject` that holds score information without taking on the responsibility of owning it and keeping it alive. Failure to use a `TWeakObjectPtr` in this situation would lead to the widget keeping the score object alive longer than necessary, potentially leading to memory leaks and unpredictable behavior.
 
 `TWeakObjectPtr` is compatible with `UPROPERTY` and appears in reflection (including Blueprint) just like a regular `TObjectPtr`.
@@ -49,4 +56,71 @@ Use of `TStrongObjectPtr` should be kept to a minimum, as it breaks expectations
 Prior to 5.5, `TStrongObjectPtr` was a wrapper for `FGCObject`, making it extremely heavy compared to the other Unreal GC pointers. On 5.5+, the implementation has changed internally to use `AddReferencedObjects` with a proper refcount implementation. `TStrongObjectPtr` should still be avoided if possible, but on 5.5+ it's no longer the performance tanker it used to be.
 
 # Unreal Smart Pointers
-**Unreal's Smart Pointers** are a feature reimplemented from the C++ standard library with a handful of extra features added on. 
+**Unreal's Smart Pointers** are Epic's reimplementation of the C++ standard library's smart pointers with a handful of extra features added on. 
+
+Smart Pointers are reference-counted automatic memory types that are the generally-recommended way to handle heap-allocated memory in modern C++ as opposed to manually managing it via `new` and `delete`. When there are no more **strong references** to a smart pointer-allocated object, the referenced object will be **immediately** destroyed (no waiting around for GC as with the `UObject` GC system)
+
+Unlike `UObject` GC pointer types, Smart Pointers can be used for any type except those with special lifetime requirements like `UObject`, regardless of whether they're reflected or not (This means you can use them with `USTRUCT`s and non-reflected classes and structs)
+
+For a more comprehensive summary of Smart Pointers in general, please see [this article](https://www.geeksforgeeks.org/cpp/smart-pointers-cpp/).
+
+# TSharedPtr
+`TSharedPtr<T>` is the Unreal equivalent of `std::shared_ptr`. It's a **strong reference** that keeps its referenced object alive by adding to its refcount.
+
+`TSharedPtr` is often used as a member variable that may be shared externally later, as an element type of an array (since `TSharedRef`'s non-nullability doesn't play nice with arrays, as a nullable return value, and occasionally as a nullable function parameter.
+# TSharedRef
+`TSharedRef<T>` is an Unreal-exclusive smart pointer type with no `std` equivalent. It is in effect simply a `TSharedPtr` that promises to never be null/invalid.
+
+This is the preferred type to use in function parameters and "make" functions return values as allowing a passed-in type to be nullable is more often than not undesirable. 
+
+`TSharedPtr` can be converted to `TSharedRef` via `ToSharedRef()`, but be aware that this will hit an assert if the `TSharedPtr` is null since you're going from a nullable type to a non-nullable type. Always make sure to check for `TSharedPtr<T>::IsValid()` before "dereferencing" with `ToSharedRef()` . 
+
+`TSharedRef` is not recommended to be used as a class or struct member as they must be externally initialized with *something* as they can never be null. `TShardPtr` or `TUniquePtr` are often more suitable for this usecase.
+
+# TWeakPtr
+`TWeakPtr` is the Unreal equivalent of `std::weak_ptr`. It's a **weak reference** that does not keep its referenced object alive and does not contribute to the refcount.
+
+Objects referenced by a `TWeakPtr` may be remotely nulled at any time. Before using a `TWeakPtr`, it is necessary to call `Pin()` to convert it into a `TSharedPtr` that may or may not be valid. Check `IsValid()` on the returned `TSharedPtr` before dereferencing and using a pinned `TWeakPtr`.
+
+Like `TWeakObjectPtr`, the purpose of this type is to keep a non-owning reference to an object that you want to observe without taking on the responsibility of managing its lifetime.
+# TUniquePtr
+`TUniquePtr` is Unreal's equivalent of `std::unique_ptr`. It's a **strong reference** that keeps its referenced object alive.
+
+Only one reference made to the referenced object allocated inside a `TUniquePtr` may ever exist. This means no `TWeakPtr`s, `TSharedPtr`s, nor `TSharedRef`s may be created to remotely reference or keep the referenced object alive.
+
+The primary purpose of `TUniquePtr` is to be used as a member variable that isn't meant to be shred externally. This allows Smart Pointer automatic memory management to clean up the `TUniquePtr`'s object when the owner is destroyed while preventing rogue external references from being made. 
+
+# Creating Smart Pointers
+
+## MakeShared and MakeSharable
+`MakeShared` and `MakeShareable` are Unreal's equivalent to `std::make_shared`. They are the preferred way to create `TSharedRef` instances (that are easily convertible to `TSharedPtr` and `TWeakPtr`).
+
+### MakeShared
+**MakeShared** is generally the preferred function to use if possible, as it allocates the Smart Pointer control block and the object memory in a single memory allocation, making it more performant. `MakeShared` takes a template argument as the referenced type and takes **variadic params** that it tries to fit into one of the template type's constructors. For example:
+
+```cpp
+// Simple struct with multiple ctors
+struct FFoo
+{
+public:
+	FFoo() = default;
+	
+	FFoo(int32 InMyInt, InMyString) : 
+		MyInt(InMyInt),
+		MyString(InMyString)
+		{}
+private:
+	int32 MyInt = 0;
+	FString MyString;
+}
+
+//...
+// This works because the default ctor isn't deleted
+TSharedRef<FFoo> NewFoo = MakeShared<FFoo>();
+
+// This also works because we have a ctor that fits the variadic arguments
+TSharedRef<FFoo> NewFooWithArgs = MakeShared<FFoo>(5, "Bar");
+```
+
+### MakeShareable
+**MakeShared** uses different syntax as it takes an existing raw heap-allocated pointer and converts it to a Smart Pointer. 
