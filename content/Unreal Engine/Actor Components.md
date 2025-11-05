@@ -4,6 +4,8 @@ tags:
   - Unreal
   - Programming
 ---
+The ins and outs of Unreal's Actor Components, from the basics to tips and tricks.
+
 # Declaring component pointer members and instantiating components
 Epic's documentation makes a handful of mistakes when demonstrating how to correctly declare component pointer members and instantiate them in a constructor (often called a "ctor")
 

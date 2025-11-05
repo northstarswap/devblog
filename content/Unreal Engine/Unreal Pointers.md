@@ -4,6 +4,7 @@ tags:
   - Unreal
   - Programming
 ---
+This guide covers Unreal’s wrappers for managing lifetimes and references.
 # Terminology
 * **Strong Reference**: Reference that keeps what it's pointing to alive.
 * **Weak Reference**: Reference that does not keep what it's pointing to alive and may become invalid at any time.

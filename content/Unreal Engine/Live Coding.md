@@ -4,14 +4,14 @@ tags:
   - Programming
 title: Live Coding is Dangerous by Default
 ---
-> [!warning] This article is up-to-date as of Unreal Engine 5.6.1
-> Live Coding with Reinstancing enabled is dangerous to use and will be for the foreseeable future. Failure to exercise caution can lead to permanently corrupted Blueprint assets. **Please read the rest of the article.**
-
 In the Unreal education community, it's common practice to introduce newcomers to the engine with how to compile their code exclusively using Live Coding with the Editor running. **This is extremely unsafe when presented as the default option for adding code to an Unreal Engine project** and completely subverts the standard workflow of adding code to an application in C++.
 
 If you're coming from another game engine such as **Unity** or **Godot**, the workflow of keeping the editor open while compiling runtime script changes is likely familiar. However, in Unreal Engine this workflow is only possible through hacky workarounds known as **Live Coding**, **Reinstancing**, and **Hot Reload**. 
 
 This article will provide a comprehensive summary of the safe workflow when working with C++ in an Unreal project as well as context and explanations as to why Live Coding is not the same as Unity or Godot hot reloading assemblies for managed languages like C#/GDScript.
+
+> [!warning] This article is up-to-date as of Unreal Engine 5.6.1
+> Live Coding with Reinstancing enabled is dangerous to use and will be for the foreseeable future. Failure to exercise caution can lead to permanently corrupted Blueprint assets. **Please read the rest of the article.**
 
 # Unreal's editor is different than other engines' editors
 In other popular game engines available to the general public, the editor is an unchanging binary that hosts your assets. When you want to work on your project, you launch the editor and keep it open for the duration of your work session while you add, remove, and modify scripts in a managed language that runs in a virtual machine like C# where hot reloading is well-supported.
