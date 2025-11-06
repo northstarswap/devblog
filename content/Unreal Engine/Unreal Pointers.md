@@ -22,6 +22,14 @@ In most code, checking for `nullptr` against a `UObject` isn't enough to confirm
 
 In reflection, `UObject`s are always passed around via pointers. However, `UObject&` is perfectly acceptable to use in C++, provided `IsValid` is checked before dereferencing. I personally strongly prefer using `UObject&` as it represents a promise that it was checked for `IsValid` before dereferencing and if we run into undesired behavior regarding lifetimes, we only have one source to blame—the single dereferencer.
 
+> [!warning]
+> There is a common misconception that a `UObject`'s outer will keep it alive even if there are no strong refs creating a path from root. **This is not true**. 
+> You must keep a chain of valid strong refs yourself and just having an outer by itself **does not count**.
+
+> [!warning]
+> There is another common misconception that a `UObject` such as an `AActor` or `UActorComponent` being destroyed will also immediately destroy its subobjects/strong referenced `UObject`s . **This is also untrue**. If a strong ref exists elsewhere such as in a widget or a subsystem, the object **will not be destroyed**. 
+> Proper utilization of strong/weak references is important to prevent zombie `UObject`s that never get garbage collected.
+
 ## TObjectPtr
 `TObjectPtr<T>` is the most common type of `UObject` pointer wrapper. It's a **strong reference** and a **hard reference** when marked with `UPROPERTY()`—and this is the only time it should be used. It serves as the replacment to raw `T*` pointers in 5.0+ to `UObject`s in `UPROPERTY()` members to enable [Incremental GC](https://dev.epicgames.com/documentation/en-us/unreal-engine/incremental-garbage-collection-in-unreal-engine) in 5.4+. 
 
