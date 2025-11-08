@@ -55,8 +55,7 @@ Unfortunately, components' lifetimes are closely tied to being owned by an Actor
 Components owning other component will lead to transforms not working correctly and serialization often having issues. It's just half-baked and not supported as of writing.
 
 You're still able to create a hierarchy of attached components, but an actor has to own them all, leading to clunky APIs. Sadly, there is no way around this.
-
-# Referencing other components from an Actor Blueprint
+# Referencing components from an Actor Blueprint
 One common workflow in other engines such as Unity is the idea of leaving a component reference null and letting designers decide which component to reference. You'd think that `FComponentReference` would be Unreal's equivalent, but this type only works in levels.
 
 One way around this is to leave the component pointer empty and ask designers to wire up the reference in the BP's construction script. Not the best UX but it works.
