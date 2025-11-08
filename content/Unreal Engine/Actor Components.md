@@ -55,6 +55,13 @@ Unfortunately, components' lifetimes are closely tied to being owned by an Actor
 Components owning other component will lead to transforms not working correctly and serialization often having issues. It's just half-baked and not supported as of writing.
 
 You're still able to create a hierarchy of attached components, but an actor has to own them all, leading to clunky APIs. Sadly, there is no way around this.
+
+# Referencing other components from an Actor Blueprint
+One common workflow in other engines such as Unity is the idea of leaving a component reference null and letting designers decide which component to reference. You'd think that `FComponentReference` would be Unreal's equivalent, but this type only works in levels.
+
+One way around this is to leave the component pointer empty and ask designers to wire up the reference in the BP's construction script. Not the best UX but it works.
+
+Alternatively, Aquanox's [component reference plugin](https://github.com/aquanox/BlueprintComponentReferencePlugin) adds a highly-configurable `FBlueprintComponentReference` and is currently the best way to achieve something similar to the Unity editor reference workflow.
 # Components can exist in a world without an actor for some reason
 This pattern is especially prevalent with `UAudioComponent` and `UNiagaraComponent` where they will just be spawned dangling, not owned by any actor in the world. I wouldn't recommend following this pattern as it completely breaks expectations as to what a component is in most programming theories, but I think it's important to know that it's sometimes used in Unreal.
 # You can add components at runtime to an actor
