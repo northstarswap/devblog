@@ -15,10 +15,9 @@ To skip straight to a more concrete example relevant to Unreal, say you're creat
 
 This approach is not scalable. It doesn't offer any features for asset management and requires that programmers with intimate knowledge of the item system to be the ones to create new assets when in a team this job would normally be delegated to gameplay designers, level designers, and artists.
 
-The data-driven approach would be to create a single `AItem` class, then create several `UItemDefinition` classes which contain field like `DisplayName` and `ItemMesh`. Then, you can always spawn the same `AItem` and inject any `UItemDefinition` into the item without creating dozens or hundreds of subclasses. Additionally, designers can create new items in a similar manner to other assets in the Editor through the right click menu and only see the relevant properties that they need to set up to create an item.
+The data-driven approach would be to create a single `AItem` class, then create several `UItemDefinition` classes which contain fields like `DisplayName` and `ItemMesh`. Then, you can always spawn the same `AItem` and inject any `UItemDefinition` into the item without creating dozens or hundreds of subclasses. Additionally, designers can create new items in a similar manner to other assets in the Editor through the right click menu and only see the relevant properties that they need to set up to create an item.
 
 ![[res/assetmanagement/img/ItemContent.png]]
-
 ![[res/assetmanagement/img/NewAppleProperties.png]]
 
 This will be elaborated on with more detailed examples further in this article.
