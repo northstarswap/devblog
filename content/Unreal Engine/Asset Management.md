@@ -17,8 +17,8 @@ This approach is not scalable. It doesn't offer any features for asset managemen
 
 The data-driven approach would be to create a single `AItem` class, then create several `UItemDefinition` classes which contain field like `DisplayName` and `ItemMesh`. Then, you can always spawn the same `AItem` and inject any `UItemDefinition` into the item without creating dozens or hundreds of subclasses. Additionally, designers can create new items in a similar manner to other assets in the Editor through the right click menu and only see the relevant properties that they need to set up to create an item.
 
-![[ItemContent.png]]
-![[AppleAsset.png]]
+![[res/assetmanagement/img/ItemContent.png]]
+![[res/assetmanagement/img/NewAppleProperties.png]]
 
 This will be elaborated on with more detailed examples further in this article.
 # Foreword on Data Tables
@@ -69,9 +69,6 @@ public:
 	UFUNCTION(BlueprintGetter)
 	FText GetDisplayName() const { return DisplayName; }
 
-	UFUNCTION(BlueprintGetter)
-	FGameplayTagContainer GetTags() const { return Tags; }
-
 	UFUNCTION(BlueprintPure)
 	UStaticMesh* GetMesh() const { return Mesh.Get(); }
 
@@ -79,10 +76,6 @@ private:
 	/** The user-facing name of this item. */
 	UPROPERTY(EditAnywhere, Getter, Category="Info")
 	FText DisplayName;
-
-	/** Item-specific tags. */
-	UPROPERTY(EditAnywhere, Getter, Category="Info")
-	FGameplayTagContainer Tags;
 
 	/** Mesh for this item in the world. */
 	UPROPERTY(EditAnywhere, Category=Visuals, meta=(AssetBundles="Visuals"))
@@ -268,12 +261,12 @@ ASandboxItem* USandboxItemLibrary::SpawnItem(UObject* WorldContext, const USandb
 Since we just added a bunch of new reflected types, properties, and functions, make sure you compile [from your IDE](Live%20Coding) and we'll move on to setting up our new asset type in the editor.
 ### Setting up the asset type in the editor
 You'll now be able to create new Item Definitions in the right click menu via *Miscellaneous* > *Data Asset*.
-![[NewItemDefinition.png]]
+![[res/assetmanagement/imgNewItemDefinition.png]]
 
 Before you do that though, you still need to add an asset entry so that the Asset Manager picks up the new asset type for the Asset Registry.
 #### Adding our new asset type to the Asset Manager
 Navigate to *Project Settings* > *Game* > *Asset Manager*. The first property in this settings panel is ***Primary Asset Types to Scan***. These are the types of assets and directories in which the Asset Manager will scan and add to the Asset Registry so we can access them during runtime by their Primary Asset ID. Add the Item Definition entry like so:
-![[AssetManagerEntry.png]]
+![[res/assetmanagement/img/AssetManagerEntry.png]]
 Now, when you add a new Item Definition to the `Items` directory, the Asset Manager will be able to find it. 
 
 > [!important]
@@ -284,19 +277,19 @@ Now, when you add a new Item Definition to the `Items` directory, the Asset Mana
 
 ## Using our new Item Definitions
 In `/Game/Items`, right click and navigate to *Miscellaneous* > *Data Asset*
-![[RightClick.png]]
+![[res/assetmanagement/img/RightClick.png]]
 
 Create a new Sandbox Item Definition
 
-![[NewItemDefinition.png]]
+![[res/assetmanagement/img/NewItemDefinition.png]]
 
 In my case, I'll name the new item `I_Apple`
 
-![[NewApple.png]]
+![[res/assetmanagement/img/NewApple.png]]
 
 Configure the item like so. We won't use the GameplayTags or DisplayName in this tutorial, but we defined getters that will allow you to easily use them in your project.
 
-![[NewAppleProperties.png]]
+![[res/assetmanagement/img/NewAppleProperties.png]]
 
 For the sake of example, I'm going to modify the `BP_ThirdPersonCharacter` blueprint in order to demonstrate how to load an item and spawn it using the API we created.
 
