@@ -1,8 +1,8 @@
 ---
 tags:
-  - Unreal
-  - Programming
-  - Advanced
+  - unreal
+  - programming
+  - advanced
 title: How to permanently remove Hot Reload and Reinstancing from an Unreal source build
 ---
 This is the most comprehensive method for preventing users from accessing Hot Reload and Reinstancing. It involves modifying UHT-injected macro definitions to prevent Hot Reload from being compiled in at all and as non-invasively-as-possible disabling Reinstancing while leaving Live Coding intact. 

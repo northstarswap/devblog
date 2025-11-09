@@ -1,7 +1,7 @@
 ---
 tags:
-  - Unreal
-  - Programming
+  - unreal
+  - programming
 title: Live Coding is Dangerous by Default
 ---
 In the Unreal education community, it's common practice to introduce newcomers to the engine with how to compile their code exclusively using Live Coding with the Editor running. **This is extremely unsafe when presented as the default option for adding code to an Unreal Engine project** and completely subverts the standard workflow of adding code to an application in C++.

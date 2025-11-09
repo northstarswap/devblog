@@ -1,9 +1,9 @@
 ---
 title: IDEs for Unreal Development
 tags:
-  - Programming
-  - Tools
-  - Unreal
+  - unreal
+  - programming
+  - tools
 ---
 When it comes to IDEs for Unreal Engine, there are two practical choices; JetBrains Rider and Microsoft Visual Studio 2022. 
 

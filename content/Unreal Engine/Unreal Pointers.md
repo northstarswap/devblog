@@ -1,8 +1,8 @@
 ---
 title: Unreal Pointer Type Reference
 tags:
-  - Unreal
-  - Programming
+  - unreal
+  - programming
 ---
 This guide covers Unreal’s wrappers for managing lifetimes and references.
 # Terminology

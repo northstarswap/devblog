@@ -1,8 +1,8 @@
 ---
 title: Everything you need to know about Actor Components
 tags:
-  - Unreal
-  - Programming
+  - unreal
+  - programming
 ---
 The ins and outs of Unreal's Actor Components, from the basics to tips and tricks.
 

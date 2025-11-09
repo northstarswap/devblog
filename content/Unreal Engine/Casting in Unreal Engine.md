@@ -1,7 +1,7 @@
 ---
 tags:
-  - Unreal
-  - Programming
+  - unreal
+  - programming
 draft: true
 ---
 Casting is a common but often-misunderstood part of developing an Unreal Engine application. This article provides an overview of the various cast types including the Blueprint Cast nodes as well as dispelling myths and misconceptions about them.
