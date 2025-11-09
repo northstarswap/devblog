@@ -18,6 +18,7 @@ This approach is not scalable. It doesn't offer any features for asset managemen
 The data-driven approach would be to create a single `AItem` class, then create several `UItemDefinition` classes which contain field like `DisplayName` and `ItemMesh`. Then, you can always spawn the same `AItem` and inject any `UItemDefinition` into the item without creating dozens or hundreds of subclasses. Additionally, designers can create new items in a similar manner to other assets in the Editor through the right click menu and only see the relevant properties that they need to set up to create an item.
 
 ![[res/assetmanagement/img/ItemContent.png]]
+
 ![[res/assetmanagement/img/NewAppleProperties.png]]
 
 This will be elaborated on with more detailed examples further in this article.
@@ -53,7 +54,6 @@ First, we'll define the pure data that will make up our items in a `UPrimaryData
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
 #include "SandboxItemDefinition.generated.h"
 
@@ -266,7 +266,9 @@ You'll now be able to create new Item Definitions in the right click menu via *M
 Before you do that though, you still need to add an asset entry so that the Asset Manager picks up the new asset type for the Asset Registry.
 #### Adding our new asset type to the Asset Manager
 Navigate to *Project Settings* > *Game* > *Asset Manager*. The first property in this settings panel is ***Primary Asset Types to Scan***. These are the types of assets and directories in which the Asset Manager will scan and add to the Asset Registry so we can access them during runtime by their Primary Asset ID. Add the Item Definition entry like so:
+
 ![[res/assetmanagement/img/AssetManagerEntry.png]]
+
 Now, when you add a new Item Definition to the `Items` directory, the Asset Manager will be able to find it. 
 
 > [!important]
@@ -277,6 +279,7 @@ Now, when you add a new Item Definition to the `Items` directory, the Asset Mana
 
 ## Using our new Item Definitions
 In `/Game/Items`, right click and navigate to *Miscellaneous* > *Data Asset*
+
 ![[res/assetmanagement/img/RightClick.png]]
 
 Create a new Sandbox Item Definition
@@ -304,6 +307,7 @@ For the sake of example, I'm going to modify the `BP_ThirdPersonCharacter` bluep
 Now when we PIE, the "apple" should appear next to our character:
 
 ![[BigApple.png]]
+
 *That's a big-ass apple.*
 # Conclusion
 The example of asset management in this article is only meant to show the basics and is by no means exhaustive. Most projects will require much more sophisticated asset management schemes tailored to their requirements. 
