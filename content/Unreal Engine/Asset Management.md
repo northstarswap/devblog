@@ -289,7 +289,7 @@ In my case, I'll name the new item `I_Apple`
 
 ![[res/assetmanagement/img/NewApple.png]]
 
-Configure the item like so. We won't use the GameplayTags or DisplayName in this tutorial, but we defined getters that will allow you to easily use them in your project.
+Configure the item like so. We won't use the DisplayName in this tutorial, but we defined getters that will allow you to easily use them in your project.
 
 ![[res/assetmanagement/img/NewAppleProperties.png]]
 
