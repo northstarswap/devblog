@@ -261,7 +261,7 @@ ASandboxItem* USandboxItemLibrary::SpawnItem(UObject* WorldContext, const USandb
 Since we just added a bunch of new reflected types, properties, and functions, make sure you compile [from your IDE](Live%20Coding) and we'll move on to setting up our new asset type in the editor.
 ### Setting up the asset type in the editor
 You'll now be able to create new Item Definitions in the right click menu via *Miscellaneous* > *Data Asset*.
-![[res/assetmanagement/imgNewItemDefinition.png]]
+![[res/assetmanagement/img/NewItemDefinition.png]]
 
 Before you do that though, you still need to add an asset entry so that the Asset Manager picks up the new asset type for the Asset Registry.
 #### Adding our new asset type to the Asset Manager
@@ -313,5 +313,3 @@ Now when we PIE, the "apple" should appear next to our character:
 The example of asset management in this article is only meant to show the basics and is by no means exhaustive. Most projects will require much more sophisticated asset management schemes tailored to their requirements. 
 
 This sample is missing the commonly-needed feature of pre-loading the basic asset (i.e. predicting what items are going to need to be loaded in the level) so that other classes only have to worry about loading their bundles. The implementation of this feature is usually highly-specialized to your game project's needs, so I deliberately omitted the implementation here.
-
-For an example of a sophisticated asset management system, see MagForceSeven's [StarfireAssets](https://github.com/MagForceSeven/Starfire/tree/main/StarfireAssets) module. This system requires integrating custom PRs to a source build of the engine so it's not usable on a vanilla installation of Unreal, however the philosophy behind it can be studied to research a solid asset management scheme in your project.
