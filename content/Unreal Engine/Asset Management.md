@@ -204,6 +204,11 @@ void ASandboxItem::OnVisualsBundleLoaded()
 ## Create a Blueprint Function Library for handling our items
 The last part of the C++ implementation will be creating a Blueprint Function Library that contains functions that make it easier to spawn items without users of our API having to think about details like remembering to set the item definition after spawning the actor.
 
+> [!info]
+> Even though it's called a Blueprint Function Library, it's perfectly acceptable to use the functions in it in C++. You can even create static non-reflected functions here so all of your library functions for a feature live in one class. 
+> 
+> The only thing inheriting BPFL does it make the reflected function callspace global so the `UFUNCTION`-marked functions can be accessed from anywhere. Otherwise, it's a completely normal class.
+
 ```cpp
 // SandboxItemLibrary.h
 
@@ -258,12 +263,12 @@ ASandboxItem* USandboxItemLibrary::SpawnItem(UObject* WorldContext, const USandb
 ```
 
 Since we just added a bunch of new reflected types, properties, and functions, make sure you compile [from your IDE](Live%20Coding) and we'll move on to setting up our new asset type in the editor.
-### Setting up the asset type in the editor
+## Setting up the asset type in the editor
 You'll now be able to create new Item Definitions in the right click menu via *Miscellaneous* > *Data Asset*.
 ![[res/assetmanagement/img/NewItemDefinition.png]]
 
 Before you do that though, you still need to add an asset entry so that the Asset Manager picks up the new asset type for the Asset Registry.
-#### Adding our new asset type to the Asset Manager
+### Adding our new asset type to the Asset Manager
 Navigate to *Project Settings* > *Game* > *Asset Manager*. The first property in this settings panel is ***Primary Asset Types to Scan***. These are the types of assets and directories in which the Asset Manager will scan and add to the Asset Registry so we can access them during runtime by their Primary Asset ID. Add the Item Definition entry like so:
 
 ![[res/assetmanagement/img/AssetManagerEntry.png]]
