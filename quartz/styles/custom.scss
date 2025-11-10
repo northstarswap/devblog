@@ -66,6 +66,12 @@ li a {
     font-size: 0.9rem;
 }
 
+ul.content li {
+    border-left: 2px solid var(--brandColor);
+    padding-left: 8px;
+    margin-bottom: 10px;
+}
+
 li:last-child {
     margin-bottom: 0;
 }
