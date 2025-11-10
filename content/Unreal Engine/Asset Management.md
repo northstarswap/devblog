@@ -36,7 +36,7 @@ Even if you have the wherewithal to create an asset management system using [sof
 ## Two people can't work on a Data Table at once
 Because of the high number of non-mergeable binary assets in a game project, most opt to use exclusive checkout via Perforce or Git with Git LFS. This means that **if one person is editing a Data Table that contains all of your items, nobody else can edit items.** This creates a serious bottleneck for teams larger than one person trying to work in parallel on content.
 
-One workaround to this problem could be to use smaller Data Tables, maybe even one for each item's asset. However at this point you might as well use [Data Assets](Unreal%20Pointers#soft-asset-pointers) which are purpose-built for exactly this usecase and offer many other advantages. 
+One workaround to this problem could be to use smaller Data Tables, maybe even one for each item's asset. However at this point you might as well use Data Assets which are purpose-built for exactly this usecase and offer many other advantages. 
 # Introduction to the Asset Manager and Primary Assets
 `UAssetManager` and "primary assets" are Epic's built-in system for managing and asynchronously loading assets that both the editor and shipped games can take advantage of. **Levels** are a default type of primary asset included with the engine and support. This section will teach you how to add your own with the pre-made `UPrimaryDataAsset` base class and load them asynchronously with bundles using the Asset Manager. My example project is a Third-Person Template project named `Sandbox` but you should use the name of your project.
 
