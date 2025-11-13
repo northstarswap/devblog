@@ -10,7 +10,7 @@ If you're coming from another game engine such as **Unity** or **Godot**, the wo
 
 This article will provide a comprehensive summary of the safe workflow when working with C++ in an Unreal project as well as context and explanations as to why Live Coding is not the same as Unity or Godot hot reloading assemblies for managed languages like C#/GDScript.
 
-> [!warning] This article is up-to-date as of Unreal Engine 5.6.1
+> [!warning] This article is up-to-date as of Unreal Engine 5.7
 > Live Coding with Reinstancing enabled is dangerous to use and will be for the foreseeable future. Failure to exercise caution can lead to permanently corrupted Blueprint assets. **Please read the rest of the article.**
 
 # Unreal's editor is different than other engines' editors
