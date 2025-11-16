@@ -60,8 +60,8 @@ It's mainly useful when you want a `UObject` to be owned by one object, but obse
 
 Use of `TStrongObjectPtr` should be kept to a minimum, as it breaks expectations for how the GC works. You should only use it if you have a firm grasp on what you're doing and have a strong justification for not staying inside the normal realm of `TObjectPtr` and `TWeakObjectPtr`. Runaway `TStrongObjectPtr` references can be hard to track down and cause memory leaks and strange behavior where `UObject`s aren't freed when they should be.
 
-### TStrongObjectPtr on <5.5
-Prior to 5.5, `TStrongObjectPtr` was a wrapper for `FGCObject`, making it extremely heavy compared to the other Unreal GC pointers. On 5.5+, the implementation has changed internally to use `AddReferencedObjects` with a proper refcount implementation. `TStrongObjectPtr` should still be avoided if possible, but on 5.5+ it's no longer the performance tanker it used to be.
+> [!warning] TStrongObjectPtr on <5.5
+> Prior to 5.5, `TStrongObjectPtr` was a wrapper for `FGCObject`, making it extremely heavy compared to the other Unreal GC pointers. On 5.5+, the implementation has changed internally to use `AddReferencedObjects` with a proper refcount implementation. `TStrongObjectPtr` should still be avoided if possible, but on 5.5+ it's no longer the performance tanker it used to be.
 
 # Unreal Smart Pointers
 **Unreal's Smart Pointers** are Epic's reimplementation of the C++ standard library's smart pointers with a handful of extra features added on. 
