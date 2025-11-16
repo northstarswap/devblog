@@ -153,7 +153,7 @@ private:
 }
 
 //...
-TSharedRef<FFoo> NewFoo = MakeShareable();
+TSharedRef<FFoo> NewFoo = MakeShareable<FFoo>();
 TSharedRef<FFoo> NewFooWithArgs = MakeShareable<FFoo>(new FFoo(5, "Bar"));
 ```
 
