@@ -129,9 +129,9 @@ TSharedRef<FFoo> NewFooWithArgs = MakeShared<FFoo>(5, "Bar");
 
 `MakeShared` also supports both a threadsafe and non-threadsafe mode in its template args. By default, Smart Pointers created by `MakeShared` are threadsafe.
 ### MakeShareable
-`MakeShared` uses different syntax as it takes an existing raw heap-allocated pointer and converts it to a Smart Pointer. 
+`MakeShareable` uses different syntax as it takes an existing raw heap-allocated pointer and converts it to a Smart Pointer. 
 
-`MakeShared` also has an overload that supports custom deleters. Simply pass a deleter functor as the second argument and the template should pick it up. If you implement a custom deleter, remember to call `FMemory::Free` to actually free the memory, otherwise you'll have a memory leak.
+`MakeShareable` also has an overload that supports custom deleters. Simply pass a deleter functor as the second argument and the template should pick it up. If you implement a custom deleter, remember to call `FMemory::Free` to actually free the memory, otherwise you'll have a memory leak.
 
 It's generally recommended to avoid `MakeShareable` if possible as it will cause 2 allocations to occur as opposed to `MakeShared` where the referenced object is allocated alongside its control block in one go.
 
@@ -154,8 +154,7 @@ private:
 
 //...
 TSharedRef<FFoo> NewFoo = MakeShareable();
-
-TSharedRef<FFoo> NewFooWithArgs = MakeShared<FFoo>(new FFoo(5, "Bar"));
+TSharedRef<FFoo> NewFooWithArgs = MakeShareable<FFoo>(new FFoo(5, "Bar"));
 ```
 
 ### MakeUnique and MakeUniqueForOverwrite
