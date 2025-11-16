@@ -10,7 +10,7 @@ When it comes to IDEs for Unreal Engine, there are two practical choices; JetBra
 Technically, you can use any text editor to edit code files such as Visual Studio Code or Notepad++, but this article is covering IDEs that provide a suite of features to make development more convenient—of which there are currently two that are generally considered "fully supported."
 
 Regardless of which IDE you choose, please read [this article](Live%20Coding.md) for guidance as to how to compile your project properly (generally not Live Coding with the editor open)
-# Visual Studio 2022
+# Visual Studio 2022/2026
 Visual Studio is the IDE that most beginners will start out using, as it is popular among Unreal educators for demonstration purposes and many people confuse it for being free (if you have more than 5 people in your team, [it isn't](https://visualstudio.microsoft.com/vs/pricing/?tab=paid-subscriptions))
 ## Intellisense and code completion
 Visual Studio **does not fully understand Unreal projects**, despite many promoting its use in Unreal game development. Unreal's build system does a lot of code generation and substituting in includes at paths that are not known to the IDE. This causes Visual Studio to hallucinate errors in the error list and red squiggly lines that **do not prevent you from building**. 
