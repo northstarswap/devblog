@@ -10,6 +10,7 @@
   --background: #000000;
   --rimLight: #4b4b4c;
   --brandFont: 'Ferrite Core DX Regular', sans-serif;
+  --linkColor: #4891ff;
 }
 
 body {
@@ -116,7 +117,7 @@ a.internal {
     padding: 0;
     background: none;
     font-weight: normal;
-    color: var(--brandColor);
+    color: var(--linkColor);
 }
 
 a.internal.tag-link {
@@ -137,11 +138,17 @@ a.internal.tag-link {
 
 a.external {
     font-weight: normal;
-    color: var(--brandColor);
+    color: var(--linkColor);
+    text-decoration: underline;
+}
+
+p a.internal {
+    text-decoration: underline;
 }
 
 code {
     background-color: var(--highlight);
+    border: 1px solid var(--rimLight);
     color: var(--secondary);
 }
 
