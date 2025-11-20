@@ -48,7 +48,7 @@ Interfaces or the new "soft cast" node are often presented as a solution to this
 # Standard Library Casts
 Besides `dynamic_cast` which isn't usable in an Unreal codebase, standard casts can be thought of as different levels of bypassing compile-time checks and saying "I know what I'm doing here."
 
-**`static` and `reinterpret` casts do not check for type and return nullptr if the check fails**. There is zero feedbaclk at runtime whether a compile-time cast succeeded or failed because **they don't exist at runtime, nor do classes**. C++ is a compiled language and everything turns into a raw memory slurry after compilation. 
+**`static` and `reinterpret` casts do not check for type and return nullptr if the check fails**. There is zero feedback at runtime whether a compile-time cast succeeded or failed because **they don't exist at runtime, nor do classes**. C++ is a compiled language and everything turns into a raw memory slurry after compilation. 
 
 Unreal's reflection system only applies to the `U`-types which is why you need to add all the strange macros everywhere, some of which are fake and only act as markers for UHT to generate special reflection code. It's not applicable here.
 ## static_cast
