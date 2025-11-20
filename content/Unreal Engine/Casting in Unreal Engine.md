@@ -18,7 +18,7 @@ Unreal's `Cast<T>(UObject*)` is an Unreal-specific global function that **dynami
 > 
 > Casting to interfaces instead of classes does not improve performance in any way (and it doesn't in BP either, this is a myth that will be dispelled below)  
 ## CastChecked
-`CastChecked<T>(UObject*, ECastCheckedType::Type)` is a variant of `Cast` that offers asserts when certain conditions are not met. It should be used when you don't want to handle the cast failing.
+`CastChecked<T>(UObject*, ECastCheckedType::Type)` is a variant of `Cast` that offers asserts when certain conditions aren't met. It should be used when you don't want to handle the cast failing.
 
 One example of where I would use `CastChecked` is if I have a component that is only ever meant to go on one type of actor, say `AGameState`. I would create a getter like so:
 
@@ -34,7 +34,9 @@ In Blueprint, one Cast node is generated per `UCLASS` type in the form of "Cast 
 
 One common misnomer that many Unreal tutorials teach is that BP Cast has significantly worse performance than `Cast<T>` and that using interfaces is a way to mitigate this performance loss. This comes from a seed of truth about using a cast node in a BP graph, but it's not telling the whole story about *why* using an interface *might* be a good idea (it's often not even the correct solution depending on the problem anyways)
 
-Unlike C++ classes which are loaded and instantiated on engine start, BP classes exist as assets that are loaded on-demand. When you place a Cast node in a BP graph, **the BP that contains it now has that class as a hard reference/dependency**. What this means in practice is that you've declared that in order for the class whose graph contains the Cast node to function, **it needs the entire class referenced by the Cast node to also be loaded, including *that* class's hard dependencies***. 
+Unlike C++ classes which are loaded and instantiated on engine start, BP classes exist as assets that are loaded on-demand. When you place a Cast node in a BP graph, **the BP that contains it now has that class as a hard reference/dependency**. 
+
+What this means in practice is that you've declared that in order for the class whose graph contains the Cast node to function, **it needs the entire class referenced by the Cast node to also be loaded, including *that* class's hard dependencies**. 
 
 Unreal does not async load assets for you, so if you neglect proper async asset management and synchronous/hard load the object with the Cast node, the class referenced in the Cast node will also be hard loaded. During this entire process, **the main application thread (game thread) will be blocked and the entire application will stall**. 
 
