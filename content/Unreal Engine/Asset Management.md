@@ -38,7 +38,7 @@ Because of the high number of non-mergeable binary assets in a game project, mos
 
 One workaround to this problem could be to use smaller Data Tables, maybe even one for each item's asset. However at this point you might as well use Data Assets which are purpose-built for exactly this usecase and offer many other advantages. 
 # Introduction to the Asset Manager and Primary Assets
-`UAssetManager` and "primary assets" are Epic's built-in system for managing and asynchronously loading assets that both the editor and shipped games can take advantage of. **Levels** are a default type of primary asset included with the engine and support. This section will teach you how to add your own with the pre-made `UPrimaryDataAsset` base class and load them asynchronously with bundles using the Asset Manager. My example project is a Third-Person Template project named `Sandbox` but you should use the name of your project.
+`UAssetManager` and "primary assets" are Epic's built-in system for managing and asynchronously loading assets that both the editor and shipped games can take advantage of. **Levels** (maps) are a default type of primary asset included with the engine and are already registered as primary assets in the project settings by default. This section will teach you how to add your own with the pre-made `UPrimaryDataAsset` base class and load them asynchronously with bundles using the Asset Manager. My example project is a Third-Person Template project named `Sandbox` but you should use the name of your project.
 
 > [!warning]
 > This guide assumes that you're not trying to live code new reflected types into the editor and following the [safe C++ workflow](Live%20Coding)
@@ -86,7 +86,7 @@ private:
 * **Everything is private** - In data-driven design, data is meant to be **immutable**. The actor that we'll add shortly will hold mutable state, but the **definition** of the base item should never change. 
 * **The `GetMesh` getter is a different type than the `Mesh` property** - The Asset Manager will handle loading the mesh asset for us, so accessors do not need to know about or care how the mesh is internally stored.
 * **The NAME_VisualsBundle bundle constant** - The `AssetBundles` meta can't contain variables or macros because UHT doesn't unwind them, but we can use constants everywhere else to enforce name safety instead of typing "Visuals" all over our codebase. Usage examples will be shown later. 
-* **We don't have to override `GetPrimaryAssetId`** - `UPrimaryDataDefinition` already has an implementation that returns the "best" common class name among subclasses + the asset name, i.e. `ItemDefinition:I_AssetName`.
+* **We don't have to override `GetPrimaryAssetId`** - `UPrimaryDataAsset` already has an implementation that returns the "best" common class name among subclasses + the asset name, i.e. `ItemDefinition:I_AssetName`.
 ### Creating the unified Item class
 Now, we'll create the class that represents our item and processes the data inside the Defintion. This class will likely not need to be subclassed in BP in the future. 
 
