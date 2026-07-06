@@ -168,7 +168,7 @@ It's generally recommended to use `MakeUnique` unless you have a specific need f
 When creating a class or struct that's intended to be allocated inside a Smart Pointer, it's often a good idea to inherit `TSharedFromThis<T>`:
 
 ```cpp
-struct FFoo: TSharedFromThis<FFoo>
+struct FFoo : public TSharedFromThis<FFoo>
 {}
 ```
 
